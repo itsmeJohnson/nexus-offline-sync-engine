@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option java_package = "com.nexus.sync.data.proto";
+option java_multiple_files = true;
+
+enum ConflictResolutionStrategyProto {
+  CONFLICT_STRATEGY_UNSPECIFIED = 0;
+  CONFLICT_STRATEGY_LAST_WRITE_WINS = 1;
+  CONFLICT_STRATEGY_SERVER_AUTHORITATIVE = 2;
+}
+
+message SyncConfigProto {
+  int32 sync_interval_minutes = 1;
+  int32 batch_size = 2;
+  ConflictResolutionStrategyProto conflict_strategy = 3;
+  string auth_token = 4;
+  int64 token_expiry_epoch = 5;
+  int64 last_successful_sync_epoch = 6;
+  bool auto_sync_enabled = 7;
+}
