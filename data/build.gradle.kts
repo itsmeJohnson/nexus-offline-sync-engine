@@ -48,6 +48,20 @@ protobuf {
     }
 }
 
+androidComponents {
+    onVariants(selector().all()) { variant ->
+        afterEvaluate {
+            val capName = variant.name.replaceFirstChar { it.uppercase() }
+            val kspTask = project.tasks.findByName("ksp${capName}Kotlin") as? org.jetbrains.kotlin.gradle.tasks.AbstractKotlinCompileTool<*>
+            val protoTask = project.tasks.findByName("generate${capName}Proto")
+            if (kspTask != null && protoTask != null) {
+                kspTask.dependsOn(protoTask)
+                kspTask.source(protoTask)
+            }
+        }
+    }
+}
+
 dependencies {
     implementation(project(":domain"))
 
