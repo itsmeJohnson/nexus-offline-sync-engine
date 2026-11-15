@@ -6,6 +6,9 @@
 build/
 */build/
 */*/build/
+bin/
+*/bin/
+*/*/bin/
 captures/
 .externalNativeBuild
 .cxx
